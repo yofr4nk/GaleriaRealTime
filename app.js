@@ -5,10 +5,6 @@ var io = require('socket.io')(server);
 
 app.use(express.static('public'))
 
-
-app.get('/hello',function(req,res){
-	res.send('aa');
-})
 io.on('connection',function(socket){
 	socket.on('imagen enviada',function(imagen){
 		io.emit('agregarimg',imagen)
