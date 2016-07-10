@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Galeria</title>
+	<script src="jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="">
+	         <h4>Imagenes Cargadas: <span class="label label-primary" id="contador">0</span></h4>
+	      </a>
+	    </div>
+	  </div>
+	</nav>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="fileUpload btn btn-primary">
+				<span id="upload">Cargar Imagen</span>
+				<input type="file" name="imagen" id="imagen" onchange="load(this)" class="upload" />
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="well well-lg ">
+				<table class="table table-responsive contenedor">
+				</table>
+				
+			</div>	
+		</div>
+	</div>
+	
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script.js"></script>
+</body>
+</html>
