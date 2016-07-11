@@ -1,15 +1,16 @@
 var socket = io();
-
+var cl = console.log.bind(console);
 socket.on('agregarimg',function(imagen){
-	var Fecha = new Date();
-	var id_img = Fecha.getMinutes()+"-"+Fecha.getSeconds()+"-"+Fecha.getHours();
-	$('.contenedor').append('<tr id="'+id_img+'"><td width="20px"><img class="img-responsive img_td"  src="'+imagen+'" /></td><td width="5px"><button class="btn btn-danger del" onclick="del(this)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>')
-	var contador = $(".contenedor")[0].children[0].children.length;
-	socket.emit('contar imagenes',contador);
+	cargar_imagenes(imagen);
+	contador = imagen.length;
 });
+function cargar_imagenes(dato){
+	var new_img = 	dato.map(function(dato,index){
+							return('<tr id="'+dato.id_img+'"><td width="20px"><img class="img-responsive img_td"  src="'+dato.imagen+'" /></td><td width="5px"><button class="btn btn-danger del" onclick="del(this)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>');
+					}).join(" ");
+	$('.contenedor')[0].innerHTML = new_img;
+}
 socket.on('del_img',function(boton){
-	var contador = parseInt($(".contenedor")[0].children[0].children.length)-1;
-	socket.emit('contar imagenes',contador);
 	$("#"+boton+"").remove();
 });
 socket.on('add_count',function(contador){
