@@ -1,3 +1,6 @@
+body{
+    background-color: #eceff1;
+}
 .fileUpload {
     position: relative;
     overflow: hidden;
@@ -14,10 +17,21 @@
     opacity: 0;
     filter: alpha(opacity=0);
 }
-.img_td{
-    width: 50% !important;
+.img{
     border: 1px solid #000;
-}
-.del{
     border-radius: 10px !important;
+}
+.btn_sty{
+    border-radius: 20px !important;
+}
+.modal-title{
+    color:white;
+}
+.modal-content{
+    background-color: #0288d1;
+}
+.modal-body{
+    border-radius: 20px !important;
+    border: 10px solid #0288d1;
+    background-color:#eceff1;
 }

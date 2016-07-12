@@ -2,13 +2,24 @@ var socket = io();
 var cl = console.log.bind(console);
 socket.on('agregarimg',function(imagen){
 	cargar_imagenes(imagen);
-	contador = imagen.length;
+	//contador = imagen.length;
 });
 function cargar_imagenes(dato){
+	
 	var new_img = 	dato.map(function(dato,index){
-							return('<tr id="'+dato.id_img+'"><td width="20px"><img class="img-responsive img_td"  src="'+dato.imagen+'" /></td><td width="5px"><button class="btn btn-danger del" onclick="del(this)"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></td></tr>');
+						var thumbnails = `<div class="row" id="${dato.id_img}">
+											<div class="col-md-12 col-sm-12" >
+												<div class="thumbnail">
+													<img class="img-responsive img" src="${dato.imagen}" alt="...">
+													<div class="caption">
+														<p><button class="btn btn-info btn_sty" role="button" data-toggle="modal" data-target=".bs-example-modal-sm"><span class="glyphicon glyphicon-comment"></span></button> <button class="btn btn-danger btn_sty" onclick="del('${dato.id_img}')" role="button"><span class="glyphicon glyphicon-remove"></span></button></p>
+													</div>
+												</div>
+											</div>
+										</div>`; 
+						return(thumbnails);
 					}).join(" ");
-	$('.contenedor')[0].innerHTML = new_img;
+	$('.cont')[0].innerHTML = new_img;
 }
 socket.on('del_img',function(boton){
 	$("#"+boton+"").remove();
@@ -26,7 +37,6 @@ function load(imagen){
     }
     reader.readAsDataURL(files);
 }
-function del(elemento){
-	var id_tr = $(elemento).parent().parent()[0].id;
-	socket.emit('Eliminar imagen',id_tr);
+function del(id){
+	socket.emit('Eliminar imagen',id);
 }

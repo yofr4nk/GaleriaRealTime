@@ -10,30 +10,58 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<nav class="navbar navbar-default">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="">
-	         <h4>Imagenes Cargadas: <span class="label label-primary" id="contador">0</span></h4>
-	      </a>
-	    </div>
-	  </div>
-	</nav>
 	<div class="row">
-		<div class="col-md-12">
-			<div class="fileUpload btn btn-primary">
-				<span id="upload">Cargar Imagen</span>
-				<input type="file" name="imagen" id="imagen" onchange="load(this)" class="upload" />
-			</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 col-sm-12">
+			<nav class="navbar navbar-inverse">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="">
+							<h4>Publicaciones: <span class="label label-primary" id="contador">0</span></h4>
+						</a>
+						
+					</div>
+					<div class="fileUpload btn btn-primary navbar-right" >
+						<span class="glyphicon glyphicon-camera" id="upload"></span>
+						<input type="file" name="imagen" id="imagen" onchange="load(this)" class="upload" />
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="col-md-4">
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
-			<div class="well well-lg ">
-				<table class="table table-responsive contenedor">
-				</table>
+		<div class="col-md-4 col-sm-12">
+			
+		</div>
+		<div class="col-md-4 col-sm-12">
+			<div class="well well-lg cont">
 				
 			</div>	
+			<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content">
+						<div class="modal-header navbar-inverse">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<h4 class="modal-title" id="gridSystemModalLabel">Comentarios</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-2">
+									<p> Hora</p>
+								</div>
+								<div class="col-md-10">
+									<p>Comentario</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
