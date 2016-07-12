@@ -34,7 +34,6 @@
 	</div>
 	<div class="row">
 		<div class="col-md-4 col-sm-12">
-			
 		</div>
 		<div class="col-md-4 col-sm-12">
 			<div class="well well-lg cont">
@@ -45,7 +44,7 @@
 					<div class="modal-content">
 						<div class="modal-header navbar-inverse">
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
+								<span class="modal-title" aria-hidden="true">&times;</span>
 							</button>
 							<h4 class="modal-title" id="gridSystemModalLabel">Comentarios</h4>
 						</div>
@@ -58,6 +57,17 @@
 									<p>Comentario</p>
 								</div>
 							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col-md-9 col-sm-9 col-xs-9">
+				        			<input type="text" id="comentario" class="form-control">
+				        			<input type="hidden" id="id_img_comentario">
+				        		</div>
+				        		<div class="col-md-2 col-sm-2 col-xs-2">
+				        			<button type="button" onclick="comentar(this)"  class="btn btn-primary"><span class="glyphicon glyphicon-comment"></span></button>
+				        		</div>
+				        	</div>
 						</div>
 					</div>
 				</div>
