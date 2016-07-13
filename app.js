@@ -31,7 +31,7 @@ io.on('connection',function(socket){
 		send_com=[];
 		for(i in com){
 			if(com[i].id==comm){
-				send_com.push({id:com[i].id,comentario:com[i].comentario});
+				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
 			}
 		}
 		io.emit('cargar_comentarios',send_com);
@@ -40,7 +40,13 @@ io.on('connection',function(socket){
 		var Fecha = new Date();
 		var Hora = Fecha.getHours()+":"+Fecha.getMinutes();
 		com.push({id:pkg.id,hora:Hora,comentario:pkg.comentario});
-		io.emit('agregar_comentarios',com);
+		send_com=[];
+		for(i in com){
+			if(com[i].id==pkg.id){
+				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
+			}
+		}
+		io.emit('agregar_comentarios',send_com);
 	});
 });
 server.listen(3000,function(){

@@ -27,21 +27,47 @@ socket.on('add_count',function(contador){
 	$("#contador")[0].innerText=contador;
 });
 socket.on('cargar_comentarios',function(comm){
-	var listar_com = 	comm.map(function(dato,index){
+	if(comm.length>0){
+		var listar_com = comm.map(function(dato,index){
 							var comen = `<div class="row" id="${dato.id}">
-											<div class="col-md-2">
-												<p> ${dato.hora}</p>
+											<div class="col-md-4">
+												<p>${dato.hora}</p>
 											</div>
-											<div class="col-md-10">
+											<div class="col-md-8">
 												<p>${dato.comentario}</p>
 											</div>
 										</div>`;
 							return(comen);
 						}).join(" ");
-	$('.modal-body')[0].innerHTML = listar_com;
+		$('.modal-body')[0].innerHTML = listar_com;
+	}else{
+		var comen = `<div class="row" >
+						<div class="col-md-2">
+							<p></p>
+						</div>
+						<div class="col-md-10">
+							<p>No existen Comentarios</p>
+						</div>
+					</div>`;
+		$('.modal-body')[0].innerHTML = comen;
+	}
+	
 });
 socket.on('agregar_comentarios',function(comm){
-	cl(comm);
+	if(comm.length>0){
+		var listar_com = comm.map(function(dato,index){
+							var comen = `<div class="row" id="${dato.id}">
+											<div class="col-md-4">
+												<p>${dato.hora}</p>
+											</div>
+											<div class="col-md-8">
+												<p>${dato.comentario}</p>
+											</div>
+										</div>`;
+							return(comen);
+						}).join(" ");
+		$('.modal-body')[0].innerHTML = listar_com;
+	}
 });
 function load(imagen){
 	var id = imagen.id;
@@ -62,6 +88,8 @@ function load_coms(id){
 }
 function comentar(elemento){
 	var id = $('#id_img_comentario').val();
-	var comentario = {'id':id,'comentario':$('#comentario').val()};
+	var comentario = $('#comentario').val();
+	var comentario = {'id':id,'comentario':comentario};
+	$('#comentario').val('');
 	socket.emit('comentar',comentario);
 }
