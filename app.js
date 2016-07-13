@@ -28,10 +28,18 @@ io.on('connection',function(socket){
 		io.emit('add_count',img.length);
 	})
 	socket.on('llamar comentarios',function(comm){
-		io.emit('cargar_comentarios',com);
+		send_com=[];
+		for(i in com){
+			if(com[i].id==comm){
+				send_com.push({id:com[i].id,comentario:com[i].comentario});
+			}
+		}
+		io.emit('cargar_comentarios',send_com);
 	});
 	socket.on('comentar',function(pkg){
-		com.push({id:pkg.id,comentario:pkg.comentario});
+		var Fecha = new Date();
+		var Hora = Fecha.getHours()+":"+Fecha.getMinutes();
+		com.push({id:pkg.id,hora:Hora,comentario:pkg.comentario});
 		io.emit('agregar_comentarios',com);
 	});
 });

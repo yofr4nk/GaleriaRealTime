@@ -2,7 +2,6 @@ var socket = io();
 var cl = console.log.bind(console);
 socket.on('agregarimg',function(imagen){
 	cargar_imagenes(imagen);
-	//contador = imagen.length;
 });
 function cargar_imagenes(dato){
 	
@@ -28,11 +27,18 @@ socket.on('add_count',function(contador){
 	$("#contador")[0].innerText=contador;
 });
 socket.on('cargar_comentarios',function(comm){
-	for(i in comm){
-		if(comm[i].id==$('#'+comm[i].id+'')[0].id){
-			//cl(comm[i].id+" "+$('#'+comm[i].id+'')[0].id);
-		}
-	}
+	var listar_com = 	comm.map(function(dato,index){
+							var comen = `<div class="row" id="${dato.id}">
+											<div class="col-md-2">
+												<p> ${dato.hora}</p>
+											</div>
+											<div class="col-md-10">
+												<p>${dato.comentario}</p>
+											</div>
+										</div>`;
+							return(comen);
+						}).join(" ");
+	$('.modal-body')[0].innerHTML = listar_com;
 });
 socket.on('agregar_comentarios',function(comm){
 	cl(comm);
