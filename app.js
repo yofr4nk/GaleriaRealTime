@@ -41,7 +41,6 @@ io.on('connection',function(socket){
 				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
 			}
 		}
-		console.log(com);
 		io.emit('cargar_comentarios',send_com);
 	});
 	socket.on('comentar',function(pkg){
