@@ -1,5 +1,5 @@
-# GaleriaRealTime
-Administrador de galería en tiempo real
+# SocialTime
+Compartiendo imagenes en tiempo real
 
 Nodejs
 Express
