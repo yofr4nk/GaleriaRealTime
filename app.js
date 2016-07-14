@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var puerto = process.env.PORT || 3000;
 var img = [];
 var com = [];
 app.use(express.static('public'))
@@ -49,6 +50,6 @@ io.on('connection',function(socket){
 		io.emit('agregar_comentarios',send_com);
 	});
 });
-server.listen(3000,function(){
+server.listen(puerto,function(){
 	console.log('Servidor Funcionando');
 });
