@@ -19,13 +19,19 @@ io.on('connection',function(socket){
 		io.emit('add_count',img.length);
 	})
 
-	socket.on('Eliminar imagen',function(boton){
+	socket.on('Eliminar imagen',function(id){
+
 		for(i in img){
-			if(boton==img[i].id_img){
+			if(id==img[i].id_img){
 				img.splice(i, 1);
+				for(var index = com.length; index--;) {
+					if(com[index].id === id) {
+					  com.splice(index, 1);
+					}
+				}
 			}
 		}
-		io.emit('del_img',boton);
+		io.emit('del_img',id);
 		io.emit('add_count',img.length);
 	})
 	socket.on('llamar comentarios',function(comm){
@@ -35,6 +41,7 @@ io.on('connection',function(socket){
 				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
 			}
 		}
+		console.log(com);
 		io.emit('cargar_comentarios',send_com);
 	});
 	socket.on('comentar',function(pkg){
