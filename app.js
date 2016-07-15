@@ -10,7 +10,7 @@ app.use(express.static('public'))
 io.on('connection',function(socket){
 	socket.emit('agregarimg',img);
 	socket.emit('add_count',img.length);
-	socket.emit('cargar_comentarios',com);
+	//socket.emit('cargar_comentarios',com);
 	socket.on('imagen enviada',function(imagen){
 		var Fecha = new Date();
 		var id_img = Fecha.getMinutes()+"-"+Fecha.getSeconds()+"-"+Fecha.getHours();
@@ -34,26 +34,14 @@ io.on('connection',function(socket){
 		io.emit('del_img',id);
 		io.emit('add_count',img.length);
 	})
-	socket.on('llamar comentarios',function(comm){
-		send_com=[];
-		for(i in com){
-			if(com[i].id==comm){
-				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
-			}
-		}
-		io.emit('cargar_comentarios',send_com);
+	socket.on('llamar comentarios',function(){
+		io.emit('cargar_comentarios',com);
 	});
 	socket.on('comentar',function(pkg){
 		var Fecha = new Date();
 		var Hora = Fecha.getHours()+":"+Fecha.getMinutes();
 		com.push({id:pkg.id,hora:Hora,comentario:pkg.comentario});
-		send_com=[];
-		for(i in com){
-			if(com[i].id==pkg.id){
-				send_com.push({id:com[i].id,hora:com[i].hora,comentario:com[i].comentario});
-			}
-		}
-		io.emit('agregar_comentarios',send_com);
+		io.emit('agregar_comentarios',com);
 	});
 });
 server.listen(puerto,function(){

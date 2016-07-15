@@ -27,9 +27,17 @@ socket.on('add_count',function(contador){
 	$("#contador")[0].innerText=contador;
 });
 socket.on('cargar_comentarios',function(comm){
-	if(comm.length>0){
-		var listar_com = comm.map(function(dato,index){
-							var comen = `<div class="row" id="${dato.id}">
+	var id_modal = $('.modal-body')[0].id;
+	var send_com = [];
+	if(comm.length>0 && id_modal!=undefined){
+		for(i in comm){
+			if(comm[i].id+"modal-body"==id_modal){
+				send_com.push({id:comm[i].id,hora:comm[i].hora,comentario:comm[i].comentario});
+			}
+		}
+		if(send_com.length>0){
+			var listar_com = send_com.map(function(dato,index){
+							var comen = `<div class="row" >
 											<div class="col-md-4">
 												<p>${dato.hora}</p>
 											</div>
@@ -39,7 +47,18 @@ socket.on('cargar_comentarios',function(comm){
 										</div>`;
 							return(comen);
 						}).join(" ");
-		$('.modal-body')[0].innerHTML = listar_com;
+			$('#'+id_modal+'')[0].innerHTML = listar_com
+		}else{
+			var comen = `<div class="row" >
+							<div class="col-md-2">
+								<p></p>
+							</div>
+							<div class="col-md-10">
+								<p>No existen Comentarios</p>
+							</div>
+						</div>`;
+			$('.modal-body')[0].innerHTML = comen;
+		}
 	}else{
 		var comen = `<div class="row" >
 						<div class="col-md-2">
@@ -54,8 +73,15 @@ socket.on('cargar_comentarios',function(comm){
 	
 });
 socket.on('agregar_comentarios',function(comm){
+	var id_modal = $('.modal-body')[0].id;
 	if(comm.length>0){
-		var listar_com = comm.map(function(dato,index){
+		send_com=[];
+		for(i in comm){
+			if(comm[i].id+"modal-body"==id_modal){
+				send_com.push({id:comm[i].id,hora:comm[i].hora,comentario:comm[i].comentario});
+			}
+		}
+		var listar_com = send_com.map(function(dato,index){
 							var comen = `<div class="row" id="${dato.id}">
 											<div class="col-md-4">
 												<p>${dato.hora}</p>
@@ -66,7 +92,8 @@ socket.on('agregar_comentarios',function(comm){
 										</div>`;
 							return(comen);
 						}).join(" ");
-		$('.modal-body')[0].innerHTML = listar_com;
+		
+		$('#'+id_modal+'')[0].innerHTML = listar_com;
 	}
 });
 function load(imagen){
@@ -83,6 +110,7 @@ function del(id){
 	socket.emit('Eliminar imagen',id);
 }
 function load_coms(id){
+	$('.modal-body').attr('id',id+'modal-body');
 	$('#id_img_comentario').val(id);
 	socket.emit('llamar comentarios',id);
 }
